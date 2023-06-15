@@ -12,7 +12,6 @@ import Header from './components/Header';
 import TodoItem from './components/TodoItem';
 import AddItem from './components/AddItem';
 import { v4 as uuidv4 } from 'uuid';
-import Sandbox from './components/sandbox';
 
 export default function App() {
   const [todos, setTodos] = useState([
@@ -56,12 +55,10 @@ export default function App() {
     });
   };
 
-  return <Sandbox />;
-
-  /* <TouchableWithoutFeedback
+  return (
+    <TouchableWithoutFeedback
       onPress={() => {
         Keyboard.dismiss();
-        console.log('dismissed keyboard!');
         Keyboard.addListener('keyboardDidHide', () => {
           console.log('keyboard hidden');
         });
@@ -71,9 +68,8 @@ export default function App() {
         <Header />
         <View style={styles.content}>
           <AddItem submitInput={submitHandler} />
-          <View>
+          <View style={styles.list}>
             <FlatList
-              // numColumns={2}
               data={todos}
               renderItem={({ item }) => (
                 <TodoItem item={item} handlePress={pressHandler} />
@@ -82,7 +78,8 @@ export default function App() {
           </View>
         </View>
       </View>
-    </TouchableWithoutFeedback>  */
+    </TouchableWithoutFeedback>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -91,6 +88,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   content: {
+    flex: 1,
     padding: 40,
+  },
+  list: {
+    flex: 1,
+    marginTop: 20,
   },
 });
