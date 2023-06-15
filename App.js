@@ -1,5 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, ScrollView, FlatList } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  FlatList,
+} from 'react-native';
 import { useState } from 'react';
 
 export default function App() {
@@ -9,10 +15,17 @@ export default function App() {
     { name: 'mario', key: '3' },
     { name: 'peach', key: '4' },
     { name: 'frog', key: '5' },
-    { name: 'toad', key: '6' },
+    { name: 'here', key: '6' },
     { name: 'toad', key: '7' },
     { name: 'toad', key: '8' },
   ]);
+
+  const pressHandler = (key) => {
+    console.log(key);
+    setPeople((prev) => {
+      return prev.filter((person) => person.key != key);
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -20,7 +33,9 @@ export default function App() {
         numColumns={2}
         data={people}
         renderItem={({ item }) => (
-          <Text style={styles.element}>{item.name}</Text>
+          <TouchableOpacity onPress={() => pressHandler(item.key)}>
+            <Text style={styles.element}>{item.name}</Text>
+          </TouchableOpacity>
         )}
       />
     </View>
